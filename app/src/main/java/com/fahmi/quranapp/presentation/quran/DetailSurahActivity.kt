@@ -4,6 +4,7 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -35,6 +36,11 @@ class DetailSurahActivity : AppCompatActivity() {
         binding = ActivityDetailSurahBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Detail Surah"
+        }
+
         val surah = intent.getParcelableExtra<SurahItem>(EXTRA_DATA)
 
         binding.apply {
@@ -63,6 +69,17 @@ class DetailSurahActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(this@DetailSurahActivity)
             }
 
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
